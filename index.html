@@ -12,7 +12,7 @@
       height: 100vh;
       width: 100vw;
       font-family: 'Open Sans', sans-serif;
-      background-color: #ff4d6d; /* default (for Firefox etc.) */
+      background: linear-gradient(135deg, #FFD1DC, #FFE4E1); /* pastel pink gradient */
       color: white;
       text-align: center;
       display: flex;
@@ -141,15 +141,15 @@
   </div>
 
   <script>
-    // Chrome detection
+    // Detect Chrome (not Edge, Opera, Brave, etc.)
     function isChromeBrowser() {
       const ua = navigator.userAgent;
       return /Chrome/.test(ua) && !/Edg|OPR|Brave|SamsungBrowser/.test(ua);
     }
 
     if (isChromeBrowser()) {
-      document.documentElement.style.background = "linear-gradient(#FFD1DC, #FFD1DC)";
-      document.body.style.background = "linear-gradient(#FFD1DC, #FFD1DC)";
+      document.documentElement.style.background = "linear-gradient(135deg, #FFD1DC, #FFE4E1)";
+      document.body.style.background = "linear-gradient(135deg, #FFD1DC, #FFE4E1)";
     }
 
     const correctPassword = "Yakult!!@@";
