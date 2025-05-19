@@ -5,33 +5,26 @@
   <title>Complaint Centre</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
-    /* Make sure background fills entire page */
-    html, body {
+    body, html {
       height: 100%;
       margin: 0;
-      padding: 0;
-      background-color: #ff4d6d; /* heart red */
-    }
-
-    body {
       font-family: 'Open Sans', sans-serif;
+      background-color: #ff4d6d; /* heart red */
       color: white;
       text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      min-height: 100vh; /* full viewport height */
+      min-height: 100vh;
     }
 
     .page {
       display: none;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 60vh;
+      padding: 40px 20px;
+      flex-grow: 1;
     }
 
     .visible {
-      display: flex;
+      display: block;
     }
 
     h1 {
@@ -45,12 +38,14 @@
 
     input, textarea, select, button {
       padding: 10px;
-      margin-top: 10px;
+      margin: 10px auto 0 auto;
       border-radius: 10px;
       border: none;
       font-size: 1em;
       width: 90%;
       max-width: 400px;
+      display: block;
+      box-sizing: border-box;
     }
 
     button {
@@ -77,15 +72,14 @@
     <h1>Complaint Centre</h1>
     <p>subtext here</p>
     <input type="password" id="password" placeholder="Enter password" />
-    <br /><br />
     <button onclick="checkPassword()">Enter</button>
   </div>
 
   <!-- Page 2: Message Form -->
   <div id="page2" class="page">
     <h1>Submit Your Complaint 📝</h1>
-    <input type="text" id="title" placeholder="Complaint Title" /><br />
-    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea><br />
+    <input type="text" id="title" placeholder="Complaint Title" />
+    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea>
     <select id="mood">
       <option disabled selected>Select mood</option>
       <option value="😡">😡</option>
@@ -108,17 +102,15 @@
       <option value="💀">💀</option>
       <option value="😳">😳</option>  <!-- embarrassed -->
       <option value="🙏">🙏</option>  <!-- grateful -->
-    </select><br /><br />
+    </select>
     <button onclick="submitComplaint()">Submit</button>
   </div>
 
   <!-- Page 3: Thank You -->
   <div id="page3" class="page">
     <h1>Thank you 💖</h1>
-    <p>Your complaint has been sent.<br />He'll get back to you.</p>
-    <br />
+    <p>Your complaint has been sent.<br>He'll get back to you.</p>
     <button onclick="goToForm()">Submit Another</button>
-    <br /><br />
     <button onclick="goToCat()">Exit</button>
   </div>
 
@@ -128,18 +120,17 @@
     <img
       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
       alt="Dancing cat"
-      style="width:300px; border-radius:20px;"
+      style="width: 300px; border-radius: 20px;"
     />
   </div>
 
   <script>
-    const correctPassword = "Yakult!!@@"; // Your password here
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL here
+    const correctPassword = "Yakult!!@@"; // Change to your password
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL
 
     function showPage(id) {
-      document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
-      document.getElementById(id).classList.add("visible");
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
     }
 
     function checkPassword() {
@@ -162,17 +153,17 @@
       }
 
       fetch(scriptURL, {
-        method: "POST",
-        body: new URLSearchParams({ title, body, mood }),
+        method: 'POST',
+        body: new URLSearchParams({ title, body, mood })
       })
-        .then(() => {
-          // Clear inputs for next use
-          document.getElementById("title").value = "";
-          document.getElementById("body").value = "";
-          document.getElementById("mood").value = "";
-          showPage("page3");
-        })
-        .catch(() => alert("Oops! Something went wrong."));
+      .then(() => {
+        // Clear inputs for next use
+        document.getElementById("title").value = "";
+        document.getElementById("body").value = "";
+        document.getElementById("mood").value = "";
+        showPage("page3");
+      })
+      .catch(() => alert("Oops! Something went wrong."));
     }
 
     function goToForm() {
