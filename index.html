@@ -6,34 +6,33 @@
   <title>Complaint Centre</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
-    /* Reset and base */
     html, body {
       height: 100%;
       margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #ff4d6d; /* heart red */
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
+      padding: 0;
     }
 
     body {
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ff4d6d;
+      color: white;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    #container {
+      width: 100%;
+      max-width: 450px;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .page {
       display: none;
-      width: 100%;
-      max-width: 400px;
-      padding: 40px 20px;
-      box-sizing: border-box;
-      background: transparent;
-      border-radius: 15px;
-      flex-shrink: 0;
+      padding: 20px;
+      text-align: center;
     }
 
     .visible {
@@ -41,136 +40,117 @@
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.3em;
-      line-height: 1.2;
+      font-size: 3em;
+      margin-bottom: 0.2em;
     }
 
     p {
       font-size: 1.2em;
-      margin-bottom: 1em;
     }
 
     input, textarea, select, button {
-      width: 100%;
-      max-width: 400px;
-      margin: 10px 0 0 0;
-      padding: 12px 15px;
+      padding: 10px;
+      margin-top: 10px;
       border-radius: 10px;
       border: none;
       font-size: 1em;
+      width: 100%;
       box-sizing: border-box;
-      display: block;
-      color: #ff4d6d;
-      font-weight: bold;
     }
 
     textarea {
       resize: vertical;
     }
 
-    select {
-      color: #ff4d6d;
-      background-color: white;
-      font-weight: bold;
-    }
-
-    input[type="password"] {
-      color: #ff4d6d;
-      font-weight: bold;
-      background-color: white;
-    }
-
     button {
       background-color: white;
+      color: #ff4d6d;
+      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s;
-      margin-top: 20px;
+      max-width: 220px;
+      margin: 10px auto 0 auto;
+      display: block;
     }
 
     button:hover {
       background-color: #ffe6ec;
     }
 
-    /* Emoji option size */
     .emoji-option {
       font-size: 1.5em;
-    }
-
-    /* Smaller headings on mobile */
-    @media (max-width: 360px) {
-      h1 {
-        font-size: 2em;
-      }
     }
   </style>
 </head>
 <body>
+  <div id="container">
+    <!-- Page 1: Greeting + Password -->
+    <div id="page1" class="page visible">
+      <h1>Complaint Centre</h1>
+      <p>subtext here</p>
+      <input type="password" id="password" placeholder="Enter password" autocomplete="off" />
+      <br />
+      <button onclick="checkPassword()">Enter</button>
+    </div>
 
-  <!-- Page 1: Greeting + Password -->
-  <div id="page1" class="page visible">
-    <h1>Complaint Centre</h1>
-    <p>subtext here</p>
-    <input type="password" id="password" placeholder="Enter password" />
-    <button onclick="checkPassword()">Enter</button>
-  </div>
+    <!-- Page 2: Message Form -->
+    <div id="page2" class="page">
+      <h1>Submit Your Complaint 📝</h1>
+      <input type="text" id="title" placeholder="Complaint Title" autocomplete="off" /><br />
+      <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea><br />
+      <select id="mood">
+        <option disabled selected>Select mood</option>
+        <option value="😡">😡</option>
+        <option value="😢">😢</option>
+        <option value="😐">😐</option>
+        <option value="🥺">🥺</option>
+        <option value="😈">😈</option>
+        <option value="😂">😂</option>
+        <option value="😭">😭</option>
+        <option value="😍">😍</option>
+        <option value="🤨">🤨</option>
+        <option value="😵">😵</option>
+        <option value="🤬">🤬</option>
+        <option value="😴">😴</option>
+        <option value="😎">😎</option>
+        <option value="🤡">🤡</option>
+        <option value="👻">👻</option>
+        <option value="🙈">🙈</option>
+        <option value="🤗">🤗</option>
+        <option value="💀">💀</option>
+        <option value="😳">😳</option> <!-- embarrassed -->
+        <option value="🙏">🙏</option> <!-- grateful -->
+      </select><br />
+      <button onclick="submitComplaint()">Submit</button>
+    </div>
 
-  <!-- Page 2: Message Form -->
-  <div id="page2" class="page">
-    <h1>Submit Your Complaint 📝</h1>
-    <input type="text" id="title" placeholder="Complaint Title" />
-    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea>
-    <select id="mood">
-      <option disabled selected>Select mood</option>
-      <option value="😡">😡</option>
-      <option value="😢">😢</option>
-      <option value="😐">😐</option>
-      <option value="🥺">🥺</option>
-      <option value="😈">😈</option>
-      <option value="😂">😂</option>
-      <option value="😭">😭</option>
-      <option value="😍">😍</option>
-      <option value="🤨">🤨</option>
-      <option value="😵">😵</option>
-      <option value="🤬">🤬</option>
-      <option value="😴">😴</option>
-      <option value="😎">😎</option>
-      <option value="🤡">🤡</option>
-      <option value="👻">👻</option>
-      <option value="🙈">🙈</option>
-      <option value="🤗">🤗</option>
-      <option value="💀">💀</option>
-      <option value="😳">😳</option>
-      <option value="🙏">🙏</option>
-    </select>
-    <button onclick="submitComplaint()">Submit</button>
-  </div>
+    <!-- Page 3: Thank You -->
+    <div id="page3" class="page">
+      <h1>Thank you 💖</h1>
+      <p>Your complaint has been sent.<br />He'll get back to you.</p>
+      <button onclick="goToForm()">Submit Another</button>
+      <button onclick="goToCat()">Exit</button>
+    </div>
 
-  <!-- Page 3: Thank You -->
-  <div id="page3" class="page">
-    <h1>Thank you 💖</h1>
-    <p>Your complaint has been sent.<br>He'll get back to you.</p>
-    <button onclick="goToForm()">Submit Another</button>
-    <button onclick="goToCat()">Exit</button>
-  </div>
-
-  <!-- Page 4: Dancing Cat -->
-  <div id="page4" class="page">
-    <h1>Enjoy this cat 🕺</h1>
-    <img
-      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-      alt="Dancing cat"
-      style="width: 300px; border-radius: 20px;"
-    />
+    <!-- Page 4: Dancing Cat -->
+    <div id="page4" class="page">
+      <h1>Enjoy this cat 🕺</h1>
+      <img
+        src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+        alt="Dancing cat"
+        style="width: 300px; border-radius: 20px; margin-top: 20px;"
+      />
+    </div>
   </div>
 
   <script>
-    const correctPassword = "Yakult!!@@"; // Change this to your password
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL
+    const correctPassword = "Yakult!!@@"; // Change to your password
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL
 
     function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-      document.getElementById(id).classList.add('visible');
+      document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
+      document.getElementById(id).classList.add("visible");
     }
 
     function checkPassword() {
@@ -193,17 +173,16 @@
       }
 
       fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({ title, body, mood })
+        method: "POST",
+        body: new URLSearchParams({ title, body, mood }),
       })
-      .then(() => {
-        // Clear inputs for next use
-        document.getElementById("title").value = "";
-        document.getElementById("body").value = "";
-        document.getElementById("mood").value = "";
-        showPage("page3");
-      })
-      .catch(() => alert("Oops! Something went wrong."));
+        .then(() => {
+          document.getElementById("title").value = "";
+          document.getElementById("body").value = "";
+          document.getElementById("mood").value = "";
+          showPage("page3");
+        })
+        .catch(() => alert("Oops! Something went wrong."));
     }
 
     function goToForm() {
