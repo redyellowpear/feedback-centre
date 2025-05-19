@@ -141,6 +141,13 @@
   </div>
 
   <script>
+    // Chrome detection: set green background if Chrome-based browser
+    const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+    if (isChrome) {
+      document.documentElement.style.backgroundColor = '#00cc44'; // flat green
+      document.body.style.backgroundColor = '#00cc44';
+    }
+
     const correctPassword = "Yakult!!@@"; // your password
     const scriptURL =
       "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // your web app URL
