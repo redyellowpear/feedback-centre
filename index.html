@@ -7,26 +7,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     html, body {
-      height: 100%;
       margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
       font-family: 'Open Sans', sans-serif;
-      background-color: #ff4d6d;
+      background-color: #ff4d6d; /* default pink */
       color: white;
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+      /* removed align-items to prevent shrinking horizontally */
       box-sizing: border-box;
+      padding: 20px;
+    }
+
+    /* Chrome-only green background override */
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      html, body {
+        background-color: #2ecc71; /* flat green for Chrome */
+      }
     }
 
     .page {
       display: none;
       width: 100%;
       max-width: 400px;
-      background-color: #ff4d6d;
+      margin: 0 auto; /* center horizontally */
+      background-color: transparent; /* let background show through */
       border-radius: 20px;
       padding: 30px 20px;
       box-sizing: border-box;
@@ -72,7 +81,6 @@
     .emoji-option {
       font-size: 1.5em;
     }
-
   </style>
 </head>
 <body>
@@ -189,19 +197,6 @@
     function goToCat() {
       showPage("page4");
     }
-
-    // === Only change here ===
-    // Detect Chrome-based browsers and change background colors to flat green
-    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    if (isChrome) {
-      document.documentElement.style.backgroundColor = "#2ecc71"; // <--- set on html too
-      document.body.style.backgroundColor = "#2ecc71";
-      document.querySelectorAll(".page").forEach(el => {
-        el.style.backgroundColor = "transparent"; // make page bg transparent so green shows through
-      });
-      // Keep button text color same or tweak if needed
-    }
-      
   </script>
 </body>
 </html>
