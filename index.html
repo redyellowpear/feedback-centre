@@ -20,7 +20,12 @@
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      overflow: hidden; /* prevent scrollbars */
+      overflow: hidden;
+    }
+
+    /* Chrome-only background override */
+    .chrome-bg {
+      background-color: #00cc44 !important; /* flat green */
     }
 
     .page {
@@ -141,16 +146,16 @@
   </div>
 
   <script>
-    // Chrome detection: set green background if Chrome-based browser
+    // Chrome detection
     const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
     if (isChrome) {
-      document.documentElement.style.backgroundColor = '#00cc44'; // flat green
-      document.body.style.backgroundColor = '#00cc44';
+      document.documentElement.classList.add('chrome-bg');
+      document.body.classList.add('chrome-bg');
     }
 
-    const correctPassword = "Yakult!!@@"; // your password
+    const correctPassword = "Yakult!!@@";
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // your web app URL
+      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec";
 
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
