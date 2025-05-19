@@ -12,7 +12,7 @@
       height: 100vh;
       width: 100vw;
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(135deg, #cc9cdb, #bc9cdb); /* pastel pink gradient */
+      background: linear-gradient(135deg, #cc9cdb, #bc9cdb);
       color: white;
       text-align: center;
       display: flex;
@@ -100,22 +100,8 @@
       <option value="😢">😢</option>
       <option value="😐">😐</option>
       <option value="🥺">🥺</option>
-      <!--       <option value="😈">😈</option> -->
       <option value="😂">😂</option>
       <option value="😭">😭</option>
-      <!--       <option value="😍">😍</option>
-      <option value="🤨">🤨</option>
-      <option value="😵">😵</option>
-      <option value="🤬">🤬</option>
-      <option value="😴">😴</option>
-      <option value="😎">😎</option>
-      <option value="🤡">🤡</option>
-      <option value="👻">👻</option>
-      <option value="🙈">🙈</option>
-      <option value="🤗">🤗</option>
-      <option value="💀">💀</option>
-      <option value="😳">😳</option>
-      <option value="🙏">🙏</option> -->
     </select>
     <br />
     <button onclick="submitComplaint()">Submit</button>
@@ -143,7 +129,7 @@
   </div>
 
   <script>
-    // Detect Chrome (not Edge, Opera, Brave, etc.)
+    // Detect Chrome
     function isChromeBrowser() {
       const ua = navigator.userAgent;
       return /Chrome/.test(ua) && !/Edg|OPR|Brave|SamsungBrowser/.test(ua);
@@ -155,8 +141,7 @@
     }
 
     const correctPassword = "Yakult!!@@";
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec";
 
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
@@ -166,36 +151,27 @@
       }
     }
 
-    function logIncorrectPassword(password) {
-      fetch(scriptURL, {
-        method: "POST",
-        body: new URLSearchParams({
-          wrongPassword: password,
-          timestamp: new Date().toISOString()
-        }),
-      }).catch(() => {
-        // ignore errors silently
-      });
-    }
-
     function checkPassword() {
-  const input = document.getElementById("password").value;
-  if (input === correctPassword) {
-    showPage("page2");
-  } else {
-    // Send wrong password attempt to your Google Apps Script
-    fetch(scriptURL, {
-      method: "POST",
-      body: new URLSearchParams({ wrongPassword: input }),
-    })
-      .then(() => {
-        alert("who are you? (wrong password) 🔪");
-        document.getElementById("password").value = ""; // clear input after wrong attempt
-      })
-      .catch(() => alert("Oops! Something went wrong logging the wrong password."));
-  }
-}
+      const input = document.getElementById("password").value;
+      if (input === correctPassword) {
+        showPage("page2");
+      } else {
+        const formData = new URLSearchParams();
+        formData.append("wrongPassword", input);
 
+        fetch(scriptURL, {
+          method: "POST",
+          body: formData,
+        })
+        .then(response => response.text())
+        .then((text) => {
+          console.log("Server response:", text);
+          alert("who are you? (wrong password) 🔪");
+          document.getElementById("password").value = "";
+        })
+        .catch(() => alert("Oops! Something went wrong logging the wrong password."));
+      }
+    }
 
     function submitComplaint() {
       const title = document.getElementById("title").value.trim();
@@ -228,7 +204,6 @@
       showPage("page4");
     }
 
-    // Randomize between two cat GIFs
     function randomizeCatGif() {
       const gifs = [
         "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDFxc25qZHRqOHhveGZyNWZvbzd3NDJqZTJsOGxndDFoa2RndzFlYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif",
