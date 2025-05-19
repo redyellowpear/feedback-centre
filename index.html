@@ -22,7 +22,6 @@
       box-sizing: border-box;
       overflow: hidden;
     }
-
     .page {
       display: none;
       width: 100%;
@@ -33,21 +32,17 @@
       box-sizing: border-box;
       box-shadow: 0 8px 15px rgba(0,0,0,0.2);
     }
-
     .visible {
       display: block;
     }
-
     h1 {
       font-size: 3em;
       margin-bottom: 0.2em;
     }
-
     p {
       font-size: 1.2em;
       margin-top: 0;
     }
-
     input, textarea, select, button {
       padding: 10px;
       margin-top: 10px;
@@ -57,7 +52,6 @@
       width: 100%;
       box-sizing: border-box;
     }
-
     button {
       background-color: white;
       color: #bc9cdb;
@@ -65,11 +59,9 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
     button:hover {
       background-color: #bc9cdb;
     }
-
     .emoji-option {
       font-size: 1.5em;
     }
@@ -77,7 +69,7 @@
 </head>
 <body>
 
-  <!-- Page 1: Greeting + Password -->
+  <!-- Page 1: Password Entry -->
   <div id="page1" class="page visible">
     <h1>Rant Room</h1>
     <p>welcome to your rant room!<br />enter the correct password or face punishment</p>
@@ -129,26 +121,13 @@
   </div>
 
   <script>
-    // Detect Chrome
-    function isChromeBrowser() {
-      const ua = navigator.userAgent;
-      return /Chrome/.test(ua) && !/Edg|OPR|Brave|SamsungBrowser/.test(ua);
-    }
-
-    if (isChromeBrowser()) {
-      document.documentElement.style.background = "linear-gradient(135deg, #FFD1DC, #FFE4E1)";
-      document.body.style.background = "linear-gradient(135deg, #cc9cdb, #bc9cdb)";
-    }
-
     const correctPassword = "Yakult!@#";
     const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec";
 
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
       document.getElementById(id).classList.add("visible");
-      if (id === "page4") {
-        randomizeCatGif();
-      }
+      if (id === "page4") randomizeCatGif();
     }
 
     function checkPassword() {
@@ -156,20 +135,12 @@
       if (input === correctPassword) {
         showPage("page2");
       } else {
-        const formData = new URLSearchParams();
-        formData.append("wrongPassword", input);
-
+        // Log wrong password to spreadsheet
         fetch(scriptURL, {
           method: "POST",
-          body: formData,
-        })
-        .then(response => response.text())
-        .then((text) => {
-          console.log("Server response:", text);
-          alert("who are you? (wrong password) 🔪");
-          document.getElementById("password").value = "";
-        })
-        .catch(() => alert("Oops! Something went wrong logging the wrong password."));
+          body: new URLSearchParams({ wrongPassword: input }),
+        });
+        alert("who are you? (wrong password) 🔪");
       }
     }
 
