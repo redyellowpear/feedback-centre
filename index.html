@@ -10,6 +10,7 @@
       height: 100%;
       margin: 0;
       font-family: 'Open Sans', sans-serif;
+      background-image: linear-gradient(45deg, #ff7a91 0%, #ff4d6d 100%);
       color: white;
       text-align: center;
       display: flex;
@@ -19,13 +20,12 @@
       min-height: 100vh;
       padding: 20px;
       box-sizing: border-box;
-      transition: background-color 0.3s;
     }
 
     .page {
       display: none;
       width: 100%;
-      max-width: 450px;
+      max-width: 400px;
     }
 
     .visible {
@@ -54,12 +54,10 @@
 
     button {
       background-color: white;
-      color: black;  /* <-- Changed this to black */
+      color: #ff4d6d;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s;
-      margin-bottom: 10px;
-      border: none;
     }
 
     button:hover {
@@ -69,6 +67,7 @@
     .emoji-option {
       font-size: 1.5em;
     }
+
   </style>
 </head>
 <body>
@@ -78,15 +77,17 @@
     <h1>Complaint Centre</h1>
     <p>subtext here</p>
     <input type="password" id="password" placeholder="Enter password" autocomplete="off" />
-    <br><br>
+    <br />
     <button onclick="checkPassword()">Enter</button>
   </div>
 
   <!-- Page 2: Message Form -->
   <div id="page2" class="page">
     <h1>Submit Your Complaint 📝</h1>
-    <input type="text" id="title" placeholder="Complaint Title" autocomplete="off" /><br>
-    <textarea id="body" rows="6" placeholder="Explain the issue..." ></textarea><br>
+    <input type="text" id="title" placeholder="Complaint Title" />
+    <br />
+    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea>
+    <br />
     <select id="mood">
       <option disabled selected>Select mood</option>
       <option value="😡">😡</option>
@@ -107,49 +108,41 @@
       <option value="🙈">🙈</option>
       <option value="🤗">🤗</option>
       <option value="💀">💀</option>
-      <option value="🥰">🥰</option>
       <option value="😳">😳</option>
-    </select><br><br>
+      <option value="🙏">🙏</option>
+    </select>
+    <br />
     <button onclick="submitComplaint()">Submit</button>
   </div>
 
   <!-- Page 3: Thank You -->
   <div id="page3" class="page">
     <h1>Thank you 💖</h1>
-    <p>Your complaint has been sent.<br>He'll get back to you.</p>
-    <br>
+    <p>Your complaint has been sent.<br />He'll get back to you.</p>
+    <br />
     <button onclick="goToForm()">Submit Another</button>
-    <br><br>
+    <br /><br />
     <button onclick="goToCat()">Exit</button>
   </div>
 
   <!-- Page 4: Dancing Cat -->
   <div id="page4" class="page">
     <h1>Enjoy this cat 🕺</h1>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Dancing cat" style="width:300px; border-radius:20px;" />
+    <img
+      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+      alt="Dancing cat"
+      style="width: 300px; border-radius: 20px;"
+    />
   </div>
 
   <script>
-    const correctPassword = "Yakult!!@@"; // ← Change if needed
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL
-
-    function detectBrowserAndSetBg() {
-      const ua = navigator.userAgent;
-
-      if (ua.includes("Firefox")) {
-        document.body.style.backgroundColor = "#ff4d6d"; // heart red for Firefox
-      } else if (ua.includes("Chrome") || ua.includes("Chromium") || ua.includes("Edg")) {
-        document.body.style.backgroundColor = "#28a745"; // green for Chrome
-      } else {
-        document.body.style.backgroundColor = "#ff4d6d"; // default heart red
-      }
-    }
-
-    detectBrowserAndSetBg();
+    const correctPassword = "Yakult!!@@"; // your password
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // your web app URL
 
     function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-      document.getElementById(id).classList.add('visible');
+      document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
+      document.getElementById(id).classList.add("visible");
     }
 
     function checkPassword() {
@@ -172,17 +165,16 @@
       }
 
       fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({ title, body, mood })
+        method: "POST",
+        body: new URLSearchParams({ title, body, mood }),
       })
-      .then(() => {
-        // Clear inputs
-        document.getElementById("title").value = "";
-        document.getElementById("body").value = "";
-        document.getElementById("mood").value = "";
-        showPage("page3");
-      })
-      .catch(() => alert("Oops! Something went wrong."));
+        .then(() => {
+          document.getElementById("title").value = "";
+          document.getElementById("body").value = "";
+          document.getElementById("mood").value = "";
+          showPage("page3");
+        })
+        .catch(() => alert("Oops! Something went wrong."));
     }
 
     function goToForm() {
