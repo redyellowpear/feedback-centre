@@ -100,10 +100,10 @@
       <option value="😢">😢</option>
       <option value="😐">😐</option>
       <option value="🥺">🥺</option>
-<!--       <option value="😈">😈</option> -->
+      <!--       <option value="😈">😈</option> -->
       <option value="😂">😂</option>
       <option value="😭">😭</option>
-<!--       <option value="😍">😍</option>
+      <!--       <option value="😍">😍</option>
       <option value="🤨">🤨</option>
       <option value="😵">😵</option>
       <option value="🤬">🤬</option>
@@ -166,12 +166,25 @@
       }
     }
 
+    function logIncorrectPassword(password) {
+      fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams({
+          wrongPassword: password,
+          timestamp: new Date().toISOString()
+        }),
+      }).catch(() => {
+        // ignore errors silently
+      });
+    }
+
     function checkPassword() {
       const input = document.getElementById("password").value;
       if (input === correctPassword) {
         showPage("page2");
       } else {
         alert("who are you? (wrong password) 🔪");
+        logIncorrectPassword(input);  // send wrong password to sheet
       }
     }
 
