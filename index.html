@@ -189,6 +189,20 @@
     function goToCat() {
       showPage("page4");
     }
+
+    // === Only change here ===
+    // Detect Chrome-based browsers and change background colors to flat green
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    if (isChrome) {
+      document.body.style.backgroundColor = "#2ecc71";
+      document.querySelectorAll(".page").forEach(el => {
+        el.style.backgroundColor = "#2ecc71";
+      });
+      // Also fix button text color on green background:
+      document.querySelectorAll("button").forEach(btn => {
+        btn.style.color = "#2ecc71"; // keep pink text on white background buttons? Or you want another color? I kept pink here.
+      });
+    }
   </script>
 </body>
 </html>
