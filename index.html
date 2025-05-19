@@ -3,29 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <title>Complaint Centre</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0; padding: 0;
-      text-align: center;
-      background-color: #ff4d6d;
-      color: white;
+    /* Make sure background fills entire viewport */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
     }
+
+    body {
+      background-color: #ff4d6d; /* Heart red */
+      color: white;
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+      min-height: 100vh; /* full viewport height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* vertical center */
+      padding: 20px;
+    }
+
     .page {
       display: none;
-      padding: 40px 20px;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 60vh; /* enough space for content */
     }
+
     .visible {
-      display: block;
+      display: flex;
     }
+
     h1 {
       font-size: 3em;
       margin-bottom: 0.2em;
     }
+
     p {
       font-size: 1.2em;
     }
+
     input, textarea, select, button {
       padding: 10px;
       margin-top: 10px;
@@ -35,6 +53,7 @@
       width: 90%;
       max-width: 400px;
     }
+
     button {
       background-color: white;
       color: #ff4d6d;
@@ -42,9 +61,11 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     button:hover {
       background-color: #ffe6ec;
     }
+
     .emoji-option {
       font-size: 1.5em;
     }
@@ -56,7 +77,7 @@
   <div id="page1" class="page visible">
     <h1>Complaint Centre</h1>
     <p>subtext here</p>
-    <input type="password" id="password" placeholder="Enter password" autocomplete="off" />
+    <input type="password" id="password" placeholder="Enter password" />
     <br><br>
     <button onclick="checkPassword()">Enter</button>
   </div>
@@ -64,8 +85,8 @@
   <!-- Page 2: Message Form -->
   <div id="page2" class="page">
     <h1>Submit Your Complaint 📝</h1>
-    <input type="text" id="title" placeholder="Complaint Title" /><br>
-    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea><br>
+    <input type="text" id="title" placeholder="Complaint Title" /><br />
+    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea><br />
     <select id="mood">
       <option disabled selected>Select mood</option>
       <option value="😡">😡</option>
@@ -86,17 +107,19 @@
       <option value="🙈">🙈</option>
       <option value="🤗">🤗</option>
       <option value="💀">💀</option>
-    </select><br><br>
+      <option value="😳">😳</option>
+      <option value="🙏">🙏</option>
+    </select><br /><br />
     <button onclick="submitComplaint()">Submit</button>
   </div>
 
   <!-- Page 3: Thank You -->
   <div id="page3" class="page">
     <h1>Thank you 💖</h1>
-    <p>Your complaint has been sent.<br>He'll get back to you.</p>
-    <br>
+    <p>Your complaint has been sent.<br />He'll get back to you.</p>
+    <br />
     <button onclick="goToForm()">Submit Another</button>
-    <br><br>
+    <br /><br />
     <button onclick="goToCat()">Exit</button>
   </div>
 
@@ -107,12 +130,12 @@
   </div>
 
   <script>
-    const correctPassword = "Yakult!!@@"; // Your password here
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script Web App URL
+    const correctPassword = "Yakult!!@@"; // ← Your password here
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // ← Your Google Apps Script URL here
 
     function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-      document.getElementById(id).classList.add('visible');
+      document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
+      document.getElementById(id).classList.add("visible");
     }
 
     function checkPassword() {
@@ -135,22 +158,17 @@
       }
 
       fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({ title, body, mood })
+        method: "POST",
+        body: new URLSearchParams({ title, body, mood }),
       })
-      .then(response => response.text())
-      .then(text => {
-        if (text === "Success") {
+        .then(() => {
           // Clear inputs for next use
           document.getElementById("title").value = "";
           document.getElementById("body").value = "";
           document.getElementById("mood").value = "";
           showPage("page3");
-        } else {
-          alert("Error sending message: " + text);
-        }
-      })
-      .catch(() => alert("Oops! Something went wrong."));
+        })
+        .catch(() => alert("Oops! Something went wrong."));
     }
 
     function goToForm() {
