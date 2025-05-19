@@ -23,11 +23,6 @@
       overflow: hidden;
     }
 
-    /* Chrome-only background override */
-    .chrome-bg {
-      background-color: #00cc44 !important; /* flat green */
-    }
-
     .page {
       display: none;
       width: 100%;
@@ -146,11 +141,17 @@
   </div>
 
   <script>
-    // Chrome detection
-    const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-    if (isChrome) {
-      document.documentElement.classList.add('chrome-bg');
-      document.body.classList.add('chrome-bg');
+    // Chrome detection function
+    function isChromeBrowser() {
+      // Checks user agent for Chrome but excludes Edge, Opera, and other Chromium browsers if needed
+      const ua = navigator.userAgent;
+      return /Chrome/.test(ua) && !/Edg|OPR|Brave|SamsungBrowser/.test(ua);
+    }
+
+    if (isChromeBrowser()) {
+      // Apply inline style directly to override all CSS
+      document.documentElement.style.backgroundColor = '#00cc44';
+      document.body.style.backgroundColor = '#00cc44';
     }
 
     const correctPassword = "Yakult!!@@";
