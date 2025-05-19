@@ -141,17 +141,15 @@
   </div>
 
   <script>
-    // Chrome detection function
+    // Apply pastel pink only on Chrome
     function isChromeBrowser() {
-      // Checks user agent for Chrome but excludes Edge, Opera, and other Chromium browsers if needed
       const ua = navigator.userAgent;
       return /Chrome/.test(ua) && !/Edg|OPR|Brave|SamsungBrowser/.test(ua);
     }
 
     if (isChromeBrowser()) {
-      // Apply inline style directly to override all CSS
-      document.documentElement.style.backgroundColor = '#FFFFFF';
-      document.body.style.backgroundColor = '#FFFFFF';
+      document.documentElement.style.backgroundColor = '#FFD1DC';
+      document.body.style.backgroundColor = '#FFD1DC';
     }
 
     const correctPassword = "Yakult!!@@";
