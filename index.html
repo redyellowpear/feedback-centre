@@ -179,14 +179,23 @@
     }
 
     function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === correctPassword) {
-        showPage("page2");
-      } else {
+  const input = document.getElementById("password").value;
+  if (input === correctPassword) {
+    showPage("page2");
+  } else {
+    // Send wrong password attempt to your Google Apps Script
+    fetch(scriptURL, {
+      method: "POST",
+      body: new URLSearchParams({ wrongPassword: input }),
+    })
+      .then(() => {
         alert("who are you? (wrong password) 🔪");
-        logIncorrectPassword(input);  // send wrong password to sheet
-      }
-    }
+        document.getElementById("password").value = ""; // clear input after wrong attempt
+      })
+      .catch(() => alert("Oops! Something went wrong logging the wrong password."));
+  }
+}
+
 
     function submitComplaint() {
       const title = document.getElementById("title").value.trim();
