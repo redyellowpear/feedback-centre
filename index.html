@@ -134,6 +134,7 @@
   <div id="page4" class="page">
     <h1>literally you right now 😼</h1>
     <img
+      id="catGif"
       src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDFxc25qZHRqOHhveGZyNWZvbzd3NDJqZTJsOGxndDFoa2RndzFlYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif"
       alt="Dancing cat"
       style="width: 300px; border-radius: 20px;"
@@ -159,6 +160,9 @@
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
       document.getElementById(id).classList.add("visible");
+      if (id === "page4") {
+        randomizeCatGif();
+      }
     }
 
     function checkPassword() {
@@ -199,6 +203,16 @@
 
     function goToCat() {
       showPage("page4");
+    }
+
+    // Randomize between two cat GIFs
+    function randomizeCatGif() {
+      const gifs = [
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDFxc25qZHRqOHhveGZyNWZvbzd3NDJqZTJsOGxndDFoa2RndzFlYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif",
+        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+      ];
+      const randomIndex = Math.floor(Math.random() * gifs.length);
+      document.getElementById("catGif").src = gifs[randomIndex];
     }
   </script>
 </body>
