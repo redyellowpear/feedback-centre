@@ -8,9 +8,9 @@
   <style>
     html, body {
       margin: 0;
-      padding: 0 20px; /* horizontal padding */
+      padding: 0;
       height: 100vh;
-      width: 100%;
+      width: 100vw;
       font-family: 'Open Sans', sans-serif;
       background-color: #ff4d6d; /* default pink */
       color: white;
@@ -20,14 +20,14 @@
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      overflow: hidden;  /* prevent scrollbars */
+      overflow: hidden; /* prevent scrollbars */
     }
 
     .page {
       display: none;
       width: 100%;
       max-width: 400px;
-      background-color: inherit; /* match the page background to body */
+      background-color: inherit;
       border-radius: 20px;
       padding: 30px 20px;
       box-sizing: border-box;
@@ -144,12 +144,6 @@
     const correctPassword = "Yakult!!@@"; // your password
     const scriptURL =
       "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // your web app URL
-
-    // Only set green background if Chrome (not Edge or Opera)
-    if (navigator.userAgent.includes("Chrome") && !navigator.userAgent.includes("Edg") && !navigator.userAgent.includes("OPR")) {
-      document.documentElement.style.backgroundColor = "#2ecc71"; // flat green
-      document.body.style.backgroundColor = "#2ecc71";
-    }
 
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
