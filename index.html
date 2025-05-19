@@ -5,30 +5,29 @@
   <title>Complaint Centre</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
-    /* Make sure background fills entire viewport */
+    /* Make sure background fills entire page */
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
+      background-color: #ff4d6d; /* heart red */
     }
 
     body {
-      background-color: #ff4d6d; /* Heart red */
-      color: white;
       font-family: 'Open Sans', sans-serif;
+      color: white;
       text-align: center;
-      min-height: 100vh; /* full viewport height */
       display: flex;
       flex-direction: column;
-      justify-content: center; /* vertical center */
-      padding: 20px;
+      justify-content: center;
+      min-height: 100vh; /* full viewport height */
     }
 
     .page {
       display: none;
       flex-direction: column;
       justify-content: center;
-      min-height: 60vh; /* enough space for content */
+      min-height: 60vh;
     }
 
     .visible {
@@ -78,7 +77,7 @@
     <h1>Complaint Centre</h1>
     <p>subtext here</p>
     <input type="password" id="password" placeholder="Enter password" />
-    <br><br>
+    <br /><br />
     <button onclick="checkPassword()">Enter</button>
   </div>
 
@@ -107,8 +106,8 @@
       <option value="🙈">🙈</option>
       <option value="🤗">🤗</option>
       <option value="💀">💀</option>
-      <option value="😳">😳</option>
-      <option value="🙏">🙏</option>
+      <option value="😳">😳</option>  <!-- embarrassed -->
+      <option value="🙏">🙏</option>  <!-- grateful -->
     </select><br /><br />
     <button onclick="submitComplaint()">Submit</button>
   </div>
@@ -126,12 +125,17 @@
   <!-- Page 4: Dancing Cat -->
   <div id="page4" class="page">
     <h1>Enjoy this cat 🕺</h1>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Dancing cat" style="width:300px; border-radius:20px;" />
+    <img
+      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+      alt="Dancing cat"
+      style="width:300px; border-radius:20px;"
+    />
   </div>
 
   <script>
-    const correctPassword = "Yakult!!@@"; // ← Your password here
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // ← Your Google Apps Script URL here
+    const correctPassword = "Yakult!!@@"; // Your password here
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbxzsxsk5QeUrKO9vjRd849U__k3jZLxNLXuqEo95BwPXZMYGm4ZKmmi5rEoSOCXfWjoJQ/exec"; // Your Google Apps Script URL here
 
     function showPage(id) {
       document.querySelectorAll(".page").forEach((p) => p.classList.remove("visible"));
