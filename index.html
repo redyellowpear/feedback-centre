@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Complaint Centre</title>
+  <title>Rant Room</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -79,8 +79,8 @@
 
   <!-- Page 1: Greeting + Password -->
   <div id="page1" class="page visible">
-    <h1>Complaint Centre</h1>
-    <p>subtext here</p>
+    <h1>Rant Room</h1>
+    <p>welcome to the rant room! enter the correct password or face punishment</p>
     <input type="password" id="password" placeholder="Enter password" autocomplete="off" />
     <br />
     <button onclick="checkPassword()">Enter</button>
@@ -88,13 +88,13 @@
 
   <!-- Page 2: Message Form -->
   <div id="page2" class="page">
-    <h1>Submit Your Complaint 📝</h1>
-    <input type="text" id="title" placeholder="Complaint Title" />
+    <h1>submit your anger or happiness 📝</h1>
+    <input type="text" id="title" placeholder="what's it about?" />
     <br />
-    <textarea id="body" rows="6" placeholder="Explain the issue..."></textarea>
+    <textarea id="body" rows="6" placeholder="ok, go on..."></textarea>
     <br />
     <select id="mood">
-      <option disabled selected>Select mood</option>
+      <option disabled selected>how are you feeling?</option>
       <option value="😡">😡</option>
       <option value="😢">😢</option>
       <option value="😐">😐</option>
@@ -122,19 +122,19 @@
 
   <!-- Page 3: Thank You -->
   <div id="page3" class="page">
-    <h1>Thank you 💖</h1>
-    <p>Your complaint has been sent.<br />He'll get back to you.</p>
+    <h1>thank you! ✨</h1>
+    <p>your joy or (most likely) anger has been sent. <br />pear will get back to you.</p>
     <br />
-    <button onclick="goToForm()">Submit Another</button>
+    <button onclick="goToForm()">submit another</button>
     <br /><br />
-    <button onclick="goToCat()">Exit</button>
+    <button onclick="goToCat()">exit</button>
   </div>
 
   <!-- Page 4: Dancing Cat -->
   <div id="page4" class="page">
-    <h1>Enjoy this cat 🕺</h1>
+    <h1>literally you right now 😼</h1>
     <img
-      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+      src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDFxc25qZHRqOHhveGZyNWZvbzd3NDJqZTJsOGxndDFoa2RndzFlYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif"
       alt="Dancing cat"
       style="width: 300px; border-radius: 20px;"
     />
@@ -166,7 +166,7 @@
       if (input === correctPassword) {
         showPage("page2");
       } else {
-        alert("Wrong password 💔");
+        alert("who are you? (wrong password) 🔪");
       }
     }
 
@@ -176,7 +176,7 @@
       const mood = document.getElementById("mood").value;
 
       if (!title || !body || !mood) {
-        alert("Please fill out all fields!");
+        alert("fill out all the fields you noob");
         return;
       }
 
