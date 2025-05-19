@@ -8,9 +8,9 @@
   <style>
     html, body {
       margin: 0;
-      padding: 0;
+      padding: 0 20px; /* horizontal padding */
       height: 100vh;
-      width: 100vw;
+      width: 100%;
       font-family: 'Open Sans', sans-serif;
       background-color: #ff4d6d; /* default pink */
       color: white;
@@ -18,9 +18,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* removed align-items to prevent shrinking horizontally */
+      align-items: center;
       box-sizing: border-box;
-      padding: 20px;
+      overflow: hidden;  /* prevent scrollbars */
     }
 
     /* Chrome-only green background override */
@@ -34,8 +34,7 @@
       display: none;
       width: 100%;
       max-width: 400px;
-      margin: 0 auto; /* center horizontally */
-      background-color: transparent; /* let background show through */
+      background-color: inherit; /* match the page background to body */
       border-radius: 20px;
       padding: 30px 20px;
       box-sizing: border-box;
